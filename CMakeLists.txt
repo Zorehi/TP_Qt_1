@@ -25,6 +25,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(TP_Qt_1
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        user.h user.cpp
+        profil.h profil.cpp
+        droits.h droits.cpp
         form.ui
 
     )
