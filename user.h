@@ -4,6 +4,7 @@
 
 #include "profil.h"
 #include "droits.h"
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -16,7 +17,7 @@ private:
     std::vector<Profil> profilList;
 
 public:
-    User();
+    User(const std::string& name, const std::string& pass, const Droits& droits);
 
     /**
      * @brief getUsername getter pour le nom de l'utilisateur
@@ -65,6 +66,22 @@ public:
      * @param newProfilList std::vector<Profil>
      */
     void setProfilList(const std::vector<Profil>& newProfilList);
+
+    /**
+     * @brief operator << permet de serializer la classe User
+     * @param os std::ostream
+     * @param user User
+     * @return std::ostream
+     */
+    friend std::ostream& operator<<(std::ostream& os, const User& user);
+
+    /**
+     * @brief operator >> permet de créer la classe User a partir d'un stream d'une chaine de caractère
+     * @param is std::istream
+     * @param user User
+     * @return std::istream
+     */
+    friend std::istream& operator>>(std::istream& is, User& user);
 
 };
 
