@@ -10,6 +10,9 @@ class LoginPage : public QWidget {
 public:
     LoginPage(QWidget *parent = nullptr);
 
+signals:
+    void connexionClicked();
+
 private slots:
     void onConnexionClicked();
 
