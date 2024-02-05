@@ -11,25 +11,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
-find_package(Qt6Widgets REQUIRED)
-target_link_libraries(TP_Qt_1 Qt6::Widgets)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+
+    LoginPage.cpp
+    LoginPage.h
+    LoginPage.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(TP_Qt_1
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        user.h user.cpp
-        profil.h profil.cpp
-        droits.h droits.cpp
-        form.ui
-
+        mainwindow.h mainwindow.cpp
+        main.h main.cpp
+        form.h form.cpp form.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET TP_Qt_1 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
