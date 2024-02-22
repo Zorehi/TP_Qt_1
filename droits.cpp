@@ -1,5 +1,9 @@
 #include "droits.h"
 
+Droits::Droits() {
+    name = "";
+}
+
 Droits::Droits(const std::string& _name) : name(_name){}
 
 std::string Droits::getName() const {

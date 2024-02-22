@@ -17,6 +17,7 @@ private:
     std::vector<Profil> profilList;
 
 public:
+    User();
     User(const std::string& name, const std::string& pass, const Droits& droits);
 
     /**

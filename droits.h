@@ -10,6 +10,7 @@ private:
     std::string name;
 
 public:
+    Droits();
     Droits(const std::string& _name);
 
     /**

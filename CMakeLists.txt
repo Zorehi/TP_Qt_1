@@ -28,6 +28,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         form.h form.cpp form.ui
         user.cpp
         droits.cpp droits.h profil.cpp profil.h user.h
+        parserjson.h parserjson.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET TP_Qt_1 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

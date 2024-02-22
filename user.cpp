@@ -1,5 +1,12 @@
 #include "user.h"
 
+User::User() {
+    username = "";
+    password = "";
+    droits = Droits();
+    profilList = std::vector<Profil>(0);
+}
+
 User::User(const std::string& name, const std::string& pass, const Droits& dts)
     : username(name), password(pass), droits(dts) {};
 
