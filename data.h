@@ -5,12 +5,12 @@
 
 class Data
 {
-private:
-    static std::vector<User> userList;
 
 public:
+    static std::vector<User> userList;
+
     static std::vector<User> getUserList();
-    static void setUserList(std::vector<User> userList);
+    static void setUserList(const std::vector<User>& userList);
 };
 
 #endif // DATA_H
