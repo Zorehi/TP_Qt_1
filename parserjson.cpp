@@ -48,10 +48,11 @@ std::vector<User> ParserJSON::parseJsonFile(const std::string& filename) {
 
         std::vector<Profil> profilVector(profilArray.size());
         for (int j = 0; j < profilArray.size(); j++) {
-            profilVector.at(j) = Profil(profilArray[j].toObject()["name"].toString().toStdString());
+            profilVector[j] = Profil(profilArray[j].toObject()["name"].toString().toStdString());
         }
 
-        userList.at(i) = User(username.toStdString(), password.toStdString(), Droits(droitsName.toStdString()));
+        userList[i] = User(username.toStdString(), password.toStdString(), Droits(droitsName.toStdString()));
+        userList[i].setProfilList(profilVector);
     }
 
     return userList;
