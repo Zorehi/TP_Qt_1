@@ -28,6 +28,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         form.h form.cpp form.ui
         user.cpp
         droits.cpp droits.h profil.cpp profil.h user.h
+        firstconnexion.h firstconnexion.cpp firstconnexion.ui
+
+        profillist.h profillist.cpp
+        profillist.h profillist.cpp profillist.ui
+
+
         parserjson.h parserjson.cpp
     )
 # Define target properties for Android with Qt 6 as:

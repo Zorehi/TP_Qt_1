@@ -5,6 +5,7 @@
 
 LoginPage::LoginPage(QWidget *parent)
     : QWidget(parent) {
+
     QLabel *labelLogin = new QLabel("Login:");
     QLabel *labelPassword = new QLabel("Password:");
 
@@ -24,9 +25,6 @@ LoginPage::LoginPage(QWidget *parent)
 }
 
 void LoginPage::onConnexionClicked() {
-    // Logique de traitement lors du clic sur le bouton "Connexion"
-    // Vous pouvez ajouter ici le code nécessaire pour gérer la connexion
 
-    // Émettre le signal pour informer MainWindow que le bouton "Connexion" a été cliqué
     emit connexionClicked();
 }

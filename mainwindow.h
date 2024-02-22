@@ -1,11 +1,13 @@
+// mainwindow.h
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 #include "loginpage.h"
-#include "form.h" // Assurez-vous que vous avez inclus la classe Form
+#include "profillist.h"
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow
+{
     Q_OBJECT
 
 public:
@@ -16,7 +18,7 @@ private slots:
 
 private:
     LoginPage *loginPage;
-    Form *form; // Nouvelle page à afficher
+    ProfilList *profilListPage;
 };
 
 #endif // MAINWINDOW_H
