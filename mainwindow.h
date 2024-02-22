@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include "loginpage.h"
 #include "profillist.h"
+#include "data.h"
 
 class MainWindow : public QMainWindow
 {
@@ -14,7 +15,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
 
 private slots:
-    void onConnexionClicked();
+    void onConnexionClicked(const QString& login, const QString& password);
 
 private:
     LoginPage *loginPage;

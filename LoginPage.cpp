@@ -25,6 +25,7 @@ LoginPage::LoginPage(QWidget *parent)
 }
 
 void LoginPage::onConnexionClicked() {
-
-    emit connexionClicked();
+    QString login = lineEditLogin->text();
+    QString password = lineEditPassword->text();
+    emit connexionClicked(login, password);
 }

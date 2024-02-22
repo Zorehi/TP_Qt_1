@@ -11,7 +11,7 @@ public:
     LoginPage(QWidget *parent = nullptr);
 
 signals:
-    void connexionClicked();
+    void connexionClicked(const QString& login, const QString& password);
 
 private slots:
     void onConnexionClicked();
