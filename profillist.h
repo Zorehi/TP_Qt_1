@@ -3,6 +3,7 @@
 
 #include "profil.h"
 #include <QMainWindow>
+#include "profilpage.h"
 
 namespace Ui {
 class ProfilList;
@@ -19,6 +20,7 @@ public slots:
     void updateTextBrowser(const std::vector<Profil>& profilList);
     void updateComboBox(const std::vector<Profil>& profilList);
     void onDeconnexionClicked(); // Déclaration de la fonction de déconnexion
+    void onChangeClicked();
 
 private:
     Ui::ProfilList *ui;

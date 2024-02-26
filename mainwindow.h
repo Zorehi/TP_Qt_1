@@ -6,6 +6,7 @@
 #include "loginpage.h"
 #include "profillist.h"
 #include "data.h"
+#include "firstconnexion.h"
 
 class MainWindow : public QMainWindow
 {
@@ -20,6 +21,7 @@ private slots:
 private:
     LoginPage *loginPage;
     ProfilList *profilListPage;
+    FirstConnexion *firstConnexion;
 };
 
 #endif // MAINWINDOW_H

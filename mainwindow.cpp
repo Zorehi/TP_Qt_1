@@ -7,10 +7,18 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    loginPage = new LoginPage(this);
-    connect(loginPage, &LoginPage::connexionClicked, this, &MainWindow::onConnexionClicked);
+    std::vector<User> userList = Data::getUserList();
+    if (userList.empty()) {
+        // Si la liste est vide, afficher la page de première connexion
+        firstConnexion = new FirstConnexion(this);
+        setCentralWidget(firstConnexion);
+    } else {
+        // Sinon, afficher la page de connexion normale
+        loginPage = new LoginPage(this);
+        connect(loginPage, &LoginPage::connexionClicked, this, &MainWindow::onConnexionClicked);
+        setCentralWidget(loginPage);
+    }
 
-    setCentralWidget(loginPage);
     setWindowTitle("Application de Connexion");
     setGeometry(300, 300, 400, 200);
 }
@@ -27,14 +35,13 @@ void MainWindow::onConnexionClicked(const QString& login, const QString& passwor
     }
     if(cont == -1){
         QMessageBox::critical(this, "Erreur", "Identifiants incorrects. Veuillez réessayer.");
+        return;
     }
     else
     {
-
-
-    profilListPage = new ProfilList(this);
-    profilListPage->updateTextBrowser(UserList[cont].getProfilList());
-    profilListPage->updateComboBox(UserList[cont].getProfilList());
+        profilListPage = new ProfilList(this);
+        profilListPage->updateTextBrowser(UserList[cont].getProfilList());
+        profilListPage->updateComboBox(UserList[cont].getProfilList());
     }
     setCentralWidget(profilListPage);
 }
