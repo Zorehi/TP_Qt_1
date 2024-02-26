@@ -3,6 +3,12 @@
 
 #include <string>
 #include <iostream>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDebug>
+#include <QJsonValue>
 
 class Profil
 {
@@ -10,36 +16,49 @@ private:
     std::string name;
 
 public:
+    /**
+     * @brief Constructeur par défaut de la classe Profil.
+     */
     Profil();
+
+    /**
+     * @brief Constructeur avec initialisation du nom du profil.
+     * @param _name Nom du profil.
+     */
     Profil(const std::string& _name);
 
     /**
-     * @brief getName getter pour le nom du profil
-     * @return std::string
+     * @brief Getter pour le nom du profil.
+     * @return Nom du profil.
      */
     std::string getName() const;
 
     /**
-     * @brief setName setter pour le nom du profil
-     * @param newName std::string
+     * @brief Setter pour le nom du profil.
+     * @param newName Nouveau nom du profil.
      */
     void setName(const std::string& newName);
 
     /**
-     * @brief operator << permet de serializer la classe Profil
-     * @param os std::ostream
-     * @param profil Profil
-     * @return std::ostream
+     * @brief Surcharge de l'opérateur << pour sérialiser la classe Profil.
+     * @param os Flux de sortie.
+     * @param profil Instance de Profil à sérialiser.
+     * @return Référence vers le flux de sortie.
      */
     friend std::ostream& operator<<(std::ostream& os, const Profil& profil);
 
     /**
-     * @brief operator >> permet de créer la classe Profil a partir d'un stream d'une chaine de caractère
-     * @param is std::istream
-     * @param profil Profil
-     * @return std::istream
+     * @brief Convertit l'instance de Profil en objet JSON.
+     * @return Objet JSON représentant l'instance de Profil.
      */
-    friend std::istream& operator>>(std::istream& is, Profil& profil);
+    QJsonObject toQJsonObject() const;
+
+    /**
+     * @brief Initialise une instance de Profil à partir d'un objet JSON.
+     * @param jsonObject Objet JSON à partir duquel initialiser l'instance de Profil.
+     * @return Instance de Profil initialisée.
+     */
+    static Profil fromQJsonObject(QJsonObject jsonObject);
 };
 
 #endif // PROFIL_H

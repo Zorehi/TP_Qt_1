@@ -7,8 +7,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    std::vector<User> userList = Data::getUserList();
-    if (userList.empty()) {
+    std::vector<User> userList = Data::getInstance()->getUserList();
+    if (userList.size() <= 1) {
         // Si la liste est vide, afficher la page de première connexion
         firstConnexion = new FirstConnexion(this);
         setCentralWidget(firstConnexion);
@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::onConnexionClicked(const QString& login, const QString& password)
 {
     // Faire la connexion réussie et obtenir les données de profil, ici on suppose que la connexion est réussie
-    std::vector<User> UserList = Data::getUserList();
+    std::vector<User> UserList = Data::getInstance()->getUserList();
     int cont = -1;
     for(int i = 0 ; i < UserList.size() ; i++){
         if(UserList[i].getUsername() == login.toStdString() && UserList[i].getPassword() == password.toStdString()){

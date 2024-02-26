@@ -3,6 +3,12 @@
 
 #include <iostream>
 #include <string>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDebug>
+#include <QJsonValue>
 
 class Droits
 {
@@ -10,36 +16,49 @@ private:
     std::string name;
 
 public:
+    /**
+     * @brief Constructeur par défaut de la classe Droits.
+     */
     Droits();
+
+    /**
+     * @brief Constructeur avec initialisation du nom du droit.
+     * @param _name Nom du droit.
+     */
     Droits(const std::string& _name);
 
     /**
-     * @brief getName getter pour le nom du droits
-     * @return std::string
+     * @brief Getter pour le nom du droit.
+     * @return Nom du droit.
      */
     std::string getName() const;
 
     /**
-     * @brief setName setter pour le nom du droits
-     * @param newName std::string
+     * @brief Setter pour le nom du droit.
+     * @param newName Nouveau nom du droit.
      */
     void setName(const std::string& newName);
 
     /**
-     * @brief operator << permet de serializer la classe Droits
-     * @param os std::ostream
-     * @param droits Droits
-     * @return std::ostream
+     * @brief Surcharge de l'opérateur << pour sérialiser la classe Droits.
+     * @param os Flux de sortie.
+     * @param droits Instance de Droits à sérialiser.
+     * @return Référence vers le flux de sortie.
      */
     friend std::ostream& operator<<(std::ostream& os, const Droits& droits);
 
     /**
-     * @brief operator >> permet de créer la classe Droits a partir d'un stream d'une chaine de caractère
-     * @param is std::istream
-     * @param droits Droits
-     * @return std::istream
+     * @brief Convertit l'instance de Droits en objet JSON.
+     * @return Objet JSON représentant l'instance de Droits.
      */
-    friend std::istream& operator>>(std::istream& is, Droits& droits);
+    QJsonObject toQJsonObject() const;
+
+    /**
+     * @brief Initialise une instance de Droits à partir d'un objet JSON.
+     * @param jsonObject Objet JSON à partir duquel initialiser l'instance de Droits.
+     * @return Instance de Droits initialisée.
+     */
+    static Droits fromQJsonObject(QJsonObject jsonObject);
 };
 
 #endif // DROITS_H

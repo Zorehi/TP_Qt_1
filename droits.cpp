@@ -15,10 +15,27 @@ void Droits::setName(const std::string& newName) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Droits& droits) {
-    os << "{ \"name\": \"" << droits.name << "\" }";
+    QJsonDocument jsonDocument(droits.toQJsonObject());
+
+    QString jsonString = jsonDocument.toJson(QJsonDocument::Indented);
+
+    os << jsonString.toStdString();
+
     return os;
 }
 
-std::istream& operator>>(std::istream& is, Droits& droits) {
-    return is;
+QJsonObject Droits::toQJsonObject() const {
+    QJsonObject jsonObject;
+    jsonObject["name"] = QString::fromStdString(getName());
+
+    return jsonObject;
+}
+
+Droits Droits::fromQJsonObject(QJsonObject jsonObject) {
+    std::string name = jsonObject["name"].toString().toStdString();
+
+    Droits droits;
+    droits.setName(name);
+
+    return droits;
 }
