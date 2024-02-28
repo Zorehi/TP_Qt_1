@@ -20,7 +20,7 @@ QJsonObject ParserJSON::parseJsonFile(const std::string& filename) {
         return QJsonObject();
     }
 
-    // Vérifier si le document JSON est un tableau
+    // Vérifier si le document JSON est un objet
     if (!jsonDoc.isObject()) {
         qWarning() << "Le document JSON n'est pas un objet.";
         return QJsonObject();
