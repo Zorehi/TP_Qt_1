@@ -25,7 +25,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         mainwindow.h mainwindow.cpp
         main.h main.cpp
-        form.h form.cpp form.ui
+
         user.cpp
         droits.cpp droits.h profil.cpp profil.h user.h
         firstconnexion.h firstconnexion.cpp firstconnexion.ui

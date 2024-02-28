@@ -51,16 +51,6 @@ void User::setProfilList(const std::vector<Profil>& newProfilList) {
     profilList = newProfilList;
 }
 
-std::ostream &operator<<(std::ostream &os, const User &user) {
-    QJsonDocument jsonDocument(user.toQJsonObject());
-
-    QString jsonString = jsonDocument.toJson(QJsonDocument::Indented);
-
-    os << jsonString.toStdString();
-
-    return os;
-}
-
 QJsonObject User::toQJsonObject() const {
     QJsonObject jsonObject;
     jsonObject["username"] = QString::fromStdString(getUsername());

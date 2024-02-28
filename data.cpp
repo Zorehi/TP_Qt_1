@@ -19,8 +19,8 @@ const std::vector<User>& Data::getUserList() const {
     return userList;
 }
 
-void Data::setUserList(const std::vector<User>& userList) {
-    Data::userList = userList;
+void Data::setUserList(const std::vector<User>& _userList) {
+    userList = _userList;
 }
 
 std::ostream &operator<<(std::ostream &os, const Data& data) {

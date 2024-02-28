@@ -2,7 +2,6 @@
 #define PROFIL_H
 
 #include <string>
-#include <iostream>
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -38,14 +37,6 @@ public:
      * @param newName Nouveau nom du profil.
      */
     void setName(const std::string& newName);
-
-    /**
-     * @brief Surcharge de l'opérateur << pour sérialiser la classe Profil.
-     * @param os Flux de sortie.
-     * @param profil Instance de Profil à sérialiser.
-     * @return Référence vers le flux de sortie.
-     */
-    friend std::ostream& operator<<(std::ostream& os, const Profil& profil);
 
     /**
      * @brief Convertit l'instance de Profil en objet JSON.

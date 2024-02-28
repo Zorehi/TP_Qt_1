@@ -12,16 +12,6 @@ void Profil::setName(const std::string& newName) {
     name = newName;
 }
 
-std::ostream& operator<<(std::ostream& os, const Profil& profil) {
-    QJsonDocument jsonDocument(profil.toQJsonObject());
-
-    QString jsonString = jsonDocument.toJson(QJsonDocument::Indented);
-
-    os << jsonString.toStdString();
-
-    return os;
-}
-
 QJsonObject Profil::toQJsonObject() const {
     QJsonObject jsonObject;
     jsonObject["name"] = QString::fromStdString(getName());

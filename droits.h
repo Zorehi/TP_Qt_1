@@ -1,7 +1,6 @@
 #ifndef DROITS_H
 #define DROITS_H
 
-#include <iostream>
 #include <string>
 #include <QFile>
 #include <QJsonDocument>
@@ -38,14 +37,6 @@ public:
      * @param newName Nouveau nom du droit.
      */
     void setName(const std::string& newName);
-
-    /**
-     * @brief Surcharge de l'opérateur << pour sérialiser la classe Droits.
-     * @param os Flux de sortie.
-     * @param droits Instance de Droits à sérialiser.
-     * @return Référence vers le flux de sortie.
-     */
-    friend std::ostream& operator<<(std::ostream& os, const Droits& droits);
 
     /**
      * @brief Convertit l'instance de Droits en objet JSON.

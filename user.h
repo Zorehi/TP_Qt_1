@@ -96,14 +96,6 @@ public:
     void setProfilList(const std::vector<Profil>& newProfilList);
 
     /**
-     * @brief Surcharge de l'opérateur << pour sérialiser la classe User.
-     * @param os Flux de sortie.
-     * @param user Instance de User à sérialiser.
-     * @return Référence vers le flux de sortie.
-     */
-    friend std::ostream& operator<<(std::ostream& os, const User& user);
-
-    /**
      * @brief Convertit l'instance de User en objet JSON.
      * @return Objet JSON représentant l'instance de User.
      */

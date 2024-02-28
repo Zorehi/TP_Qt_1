@@ -14,16 +14,6 @@ void Droits::setName(const std::string& newName) {
     name = newName;
 }
 
-std::ostream& operator<<(std::ostream& os, const Droits& droits) {
-    QJsonDocument jsonDocument(droits.toQJsonObject());
-
-    QString jsonString = jsonDocument.toJson(QJsonDocument::Indented);
-
-    os << jsonString.toStdString();
-
-    return os;
-}
-
 QJsonObject Droits::toQJsonObject() const {
     QJsonObject jsonObject;
     jsonObject["name"] = QString::fromStdString(getName());
