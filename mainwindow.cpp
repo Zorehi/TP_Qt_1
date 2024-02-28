@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     if (userList.size() <= 1) {
         // Si la liste est vide, afficher la page de première connexion
         firstConnexion = new FirstConnexion(this);
+        connect(firstConnexion, &FirstConnexion::createUser, this, &MainWindow::addNewUser);
         setCentralWidget(firstConnexion);
     } else {
         // Sinon, afficher la page de connexion normale
@@ -20,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     setWindowTitle("Application de Connexion");
-    setGeometry(300, 300, 400, 200);
+    setGeometry(300, 300, 400, 400);
 }
 
 void MainWindow::onConnexionClicked(const QString& login, const QString& password)
@@ -44,4 +45,19 @@ void MainWindow::onConnexionClicked(const QString& login, const QString& passwor
         profilListPage->updateComboBox(UserList[cont].getProfilList());
     }
     setCentralWidget(profilListPage);
+}
+
+void MainWindow::addNewUser(const User &newUser)
+{
+    // Ajouter le nouvel utilisateur à la liste userList
+    Data::getInstance()->addUser(newUser);
+    std::ofstream outFile("userdata.json");
+    outFile << *Data::getInstance();
+    outFile.close();
+
+
+    // Afficher la page de connexion normale après avoir ajouté le nouvel utilisateur
+    loginPage = new LoginPage(this);
+    connect(loginPage, &LoginPage::connexionClicked, this, &MainWindow::onConnexionClicked);
+    setCentralWidget(loginPage);
 }

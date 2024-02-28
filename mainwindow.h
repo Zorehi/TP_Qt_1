@@ -7,6 +7,7 @@
 #include "profillist.h"
 #include "data.h"
 #include "firstconnexion.h"
+#include <fstream>
 
 class MainWindow : public QMainWindow
 {
@@ -17,6 +18,7 @@ public:
 
 private slots:
     void onConnexionClicked(const QString& login, const QString& password);
+    void addNewUser(const User &newUser);
 
 private:
     LoginPage *loginPage;
