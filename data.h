@@ -52,6 +52,8 @@ public:
      */
     void setUserList(const std::vector<User>& userList);
 
+    void addUser(const User& newUser);
+
     /**
      * @brief Surcharge de l'opérateur << pour sérialiser la classe Data.
      * @param os Flux de sortie.
