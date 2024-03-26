@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     setWindowTitle("Application de Connexion");
     setGeometry(300, 300, 400, 400);
+    resize(800,400);
 }
 
 void MainWindow::onConnexionClicked(const QString& login, const QString& password)

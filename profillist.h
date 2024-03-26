@@ -15,7 +15,7 @@ class ProfilList : public QMainWindow
 
 public:
     explicit ProfilList(QWidget *parent = nullptr);
-
+    ~ProfilList();
 public slots:
     void updateTextBrowser(const std::vector<Profil>& profilList);
     void updateComboBox(const std::vector<Profil>& profilList);

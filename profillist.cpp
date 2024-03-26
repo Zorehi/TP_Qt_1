@@ -8,7 +8,6 @@ ProfilList::ProfilList(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Connecter le signal clicked du bouton "Déconnexion" à la fonction onDeconnexionClicked
     connect(ui->pushButton_2, &QPushButton::clicked, this, &ProfilList::onDeconnexionClicked);
     connect(ui->pushButton, &QPushButton::clicked, this, &ProfilList::onChangeClicked);
 }
@@ -20,6 +19,10 @@ void ProfilList::onDeconnexionClicked() {
 
     // Supprimer ProfilList
     deleteLater();
+}
+ProfilList::~ProfilList()
+{
+    delete ui;
 }
 
 void ProfilList::updateTextBrowser(const std::vector<Profil>& profilList) {

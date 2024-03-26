@@ -16,6 +16,12 @@ public:
     explicit ProfilPage(const QString& profileName, QWidget *parent = nullptr);
     ~ProfilPage();
 
+private slots:
+    void showListTable();
+    void openFileDialog();
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
 private:
     Ui::ProfilPage *ui;
 };
