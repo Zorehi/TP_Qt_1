@@ -16,7 +16,7 @@ class ProfilPage : public QWidget
     Q_OBJECT
 
 public:
-    explicit ProfilPage(Profil* profileName, QWidget *parent = nullptr);
+    explicit ProfilPage(Profil& profil, QWidget *parent = nullptr);
     ~ProfilPage();
 
 private slots:
@@ -28,8 +28,7 @@ protected:
 
 private:
     Ui::ProfilPage *ui;
-    Profil *profil;
-    Database *newdbt;
+    Profil& profil;
 };
 
 #endif // PROFILPAGE_H

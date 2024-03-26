@@ -3,21 +3,16 @@
 #include "listtable.h"
 #include <QFileDialog>
 
-ProfilPage::ProfilPage(Profil* profilpage, QWidget *parent) :
+ProfilPage::ProfilPage(Profil& profil, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProfilPage),
-    profil(profilpage)
+    profil(profil)
 {
-    if (!profil) {
-        qDebug() << "Profil pointer is null!";
-        // Traitez le cas où le pointeur est nul selon votre logique métier
-    }
-
     ui->setupUi(this);
 
     connect(ui->pushButton, &QPushButton::clicked, this, &ProfilPage::showListTable);
     connect(ui->addButton, &QPushButton::clicked, this, &ProfilPage::openFileDialog);
-    updateListWidget(profil->getDbList());
+    updateListWidget(profil.getDbList());
 }
 
 void ProfilPage::paintEvent(QPaintEvent *event) {
@@ -48,17 +43,14 @@ void ProfilPage::openFileDialog() {
     QString filePath = QFileDialog::getOpenFileName(this, "Sélectionner un fichier", "", "Fichiers (*.txt *.db)");
     QString fileName = QFileInfo(filePath).fileName();
     if (!filePath.isEmpty()) {
-        if (profil) {
-            qDebug() << "Selected Name:" << profil->getName();
-        }
         qDebug() << "Selected Name:" << fileName;
         Database newDatabase(filePath.toStdString());
         newDatabase.setName(fileName.toStdString());
         newDatabase.setPath(filePath.toStdString()); // Ajouter le chemin du fichier à la base de données
-        qDebug() << "Selected Name:" << profil->getName();
+        qDebug() << "Selected Name:" << profil.getName();
         // Ajouter la base de données à la liste des bases de données dans le profil
-        profil->getDbList().push_back(newDatabase);
-        updateListWidget(profil->getDbList());
+        profil.getDbList().push_back(newDatabase);
+        updateListWidget(profil.getDbList());
     }
 }
 

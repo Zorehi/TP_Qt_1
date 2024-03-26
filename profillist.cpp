@@ -2,7 +2,7 @@
 #include "mainwindow.h"
 #include "ui_profillist.h"
 
-ProfilList::ProfilList(const std::vector<Profil>& profilList,QWidget *parent) :
+ProfilList::ProfilList(std::vector<Profil>& profilList,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProfilList),
     profilList(profilList)
@@ -50,15 +50,15 @@ void ProfilList::onChangeClicked() {
     Profil* profilFound = nullptr;  // Initialisation à nullptr
 
     // Chercher le profil correspondant au nom sélectionné
-    for (const Profil& profil : this->profilList) {
+    for (Profil& profil : this->profilList) {
         if (profil.getName().c_str() == selectedName) {
-            profilFound = new Profil(profil);  // Affecter l'adresse du profil trouvé
+            profilFound = &profil;  // Affecter l'adresse du profil trouvé
             break;  // Sortir de la boucle une fois que le profil est trouvé
         }
     }
     if (profilFound) {
         // Créer une instance de ProfilePage en lui transmettant le profil choisi
-        ProfilPage *profilePage = new ProfilPage(profilFound, this);
+        ProfilPage *profilePage = new ProfilPage(*profilFound, this);
 
         // Définir ProfilePage comme widget central de la fenêtre principale
         ((MainWindow*)parent())->setCentralWidget(profilePage);

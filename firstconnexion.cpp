@@ -30,8 +30,6 @@ void FirstConnexion::onPushButtonClicked()
     }
 
     // Créer un nouvel utilisateur avec les informations saisies
-    User newUser(username.toStdString(), password.toStdString(),droits ); // Remplacer Droits() avec les droits appropriés
-
-    // Émettre le signal pour créer un nouvel utilisateur
-    emit createUser(newUser);
+    User newUser(username.toStdString(), password.toStdString(), droits); // Remplacer Droits() avec les droits appropriés
+    Data::getInstance()->addUser(newUser);
 }

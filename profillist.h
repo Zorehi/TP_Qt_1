@@ -14,7 +14,7 @@ class ProfilList : public QWidget
     Q_OBJECT
 
 public:
-    explicit ProfilList(const std::vector<Profil>&, QWidget *parent = nullptr);
+    explicit ProfilList(std::vector<Profil>&, QWidget *parent = nullptr);
     ~ProfilList();
 public slots:
     void updateTextBrowser(const std::vector<Profil>& profilList);
@@ -24,7 +24,7 @@ public slots:
 
 private:
     Ui::ProfilList *ui;
-    std::vector<Profil> profilList;
+    std::vector<Profil>& profilList;
     const Profil* profilFound;
 };
 

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "user.h"
 #include "droits.h"
+#include "data.h"
 #include <QMessageBox>
 
 namespace Ui {
