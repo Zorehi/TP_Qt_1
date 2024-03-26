@@ -1,6 +1,9 @@
 #ifndef PROFILPAGE_H
 #define PROFILPAGE_H
 
+#include "profil.h"
+
+#include "database.h"
 #include <QWidget>
 #include <QString>
 
@@ -13,7 +16,7 @@ class ProfilPage : public QWidget
     Q_OBJECT
 
 public:
-    explicit ProfilPage(const QString& profileName, QWidget *parent = nullptr);
+    explicit ProfilPage(Profil* profileName, QWidget *parent = nullptr);
     ~ProfilPage();
 
 private slots:
@@ -21,9 +24,12 @@ private slots:
     void openFileDialog();
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void updateListWidget(const std::vector<Database>& dbList); // Fonction ajoutée pour mettre à jour le listWidget
 
 private:
     Ui::ProfilPage *ui;
+    Profil *profil;
+    Database *newdbt;
 };
 
 #endif // PROFILPAGE_H

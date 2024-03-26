@@ -41,9 +41,10 @@ void MainWindow::onConnexionClicked(const QString& login, const QString& passwor
     }
     else
     {
-        profilListPage = new ProfilList(this);
-        profilListPage->updateTextBrowser(UserList[cont].getProfilList());
-        profilListPage->updateComboBox(UserList[cont].getProfilList());
+        std::vector<Profil> listProfil = UserList[cont].getProfilList();
+        profilListPage = new ProfilList(listProfil, this);
+        profilListPage->updateTextBrowser(listProfil);
+        profilListPage->updateComboBox(listProfil);
     }
     setCentralWidget(profilListPage);
 }

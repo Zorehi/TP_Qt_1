@@ -12,6 +12,15 @@ void Database::setPath(const std::string& newPath) {
     path = newPath;
 }
 
+
+std::string Database::getName() const {
+    return dbName;
+}
+
+void Database::setName(const std::string& newName) {
+    dbName = newName;
+}
+
 std::ostream& operator<<(std::ostream& os, const Database& db) {
     QJsonDocument jsonDocument(db.toQJsonObject());
 

@@ -14,6 +14,7 @@ class Database
 {
 private:
     std::string path;
+    std::string dbName;
 
 public:
     /**
@@ -38,6 +39,18 @@ public:
      * @param newPath Nouveau chemin de la base de données.
      */
     void setPath(const std::string& newPath);
+
+    /**
+     * @brief Setter pour le chemin de la base de données.
+     * @param newPath Nouveau chemin de la base de données.
+     */
+    void setName(const std::string& newName);
+
+    /**
+     * @brief Getter pour le chemin de la base de données.
+     * @return Chemin de la base de données.
+     */
+    std::string getName() const;
 
     /**
      * @brief Surcharge de l'opérateur << pour sérialiser la classe Database.

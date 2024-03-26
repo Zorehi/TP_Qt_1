@@ -2,14 +2,17 @@
 #include "mainwindow.h"
 #include "ui_profillist.h"
 
-ProfilList::ProfilList(QWidget *parent) :
+ProfilList::ProfilList(const std::vector<Profil>& profilList,QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ProfilList)
+    ui(new Ui::ProfilList),
+    profilList(profilList)
+
 {
     ui->setupUi(this);
 
     connect(ui->pushButton_2, &QPushButton::clicked, this, &ProfilList::onDeconnexionClicked);
     connect(ui->pushButton, &QPushButton::clicked, this, &ProfilList::onChangeClicked);
+
 }
 
 
@@ -42,14 +45,26 @@ void ProfilList::updateComboBox(const std::vector<Profil>& profilList){
 }
 
 void ProfilList::onChangeClicked() {
-    // Récupérer le nom sélectionné dans le QComboBox
     QString selectedName = ui->comboBox->currentText();
 
-    // Créer une instance de ProfilePage en lui transmettant le nom choisi
-    ProfilPage *profilePage = new ProfilPage(selectedName);
+    Profil* profilFound = nullptr;  // Initialisation à nullptr
 
-    // Définir ProfilePage comme widget central de la fenêtre principale
-    ((MainWindow*)parent())->setCentralWidget(profilePage);
+    // Chercher le profil correspondant au nom sélectionné
+    for (const Profil& profil : this->profilList) {
+        if (profil.getName().c_str() == selectedName) {
+            profilFound = new Profil(profil);  // Affecter l'adresse du profil trouvé
+            break;  // Sortir de la boucle une fois que le profil est trouvé
+        }
+    }
+    if (profilFound) {
+        // Créer une instance de ProfilePage en lui transmettant le profil choisi
+        ProfilPage *profilePage = new ProfilPage(profilFound, this);
+
+        // Définir ProfilePage comme widget central de la fenêtre principale
+        ((MainWindow*)parent())->setCentralWidget(profilePage);
+    } else {
+        qDebug() << "Profil non trouvé.";
+    }
 }
 
 
