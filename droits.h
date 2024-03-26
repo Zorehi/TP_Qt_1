@@ -13,6 +13,9 @@ class Droits
 {
 private:
     std::string name;
+    bool read;
+    bool write;
+    bool modify;
 
 public:
     /**
@@ -24,7 +27,25 @@ public:
      * @brief Constructeur avec initialisation du nom du droit.
      * @param _name Nom du droit.
      */
-    Droits(const std::string& _name);
+    Droits(const std::string& _name, const bool read, const bool write, const bool modify);
+
+    /**
+     * @brief Getter pour le droit de lecture.
+     * @return Nom du droit.
+     */
+    bool hasReadable() const;
+
+    /**
+     * @brief Getter pour le droit d'écriture.
+     * @return Nom du droit.
+     */
+    bool hasWritable() const;
+
+    /**
+     * @brief Getter pour le droit de modification.
+     * @return Nom du droit.
+     */
+    bool hasModify() const;
 
     /**
      * @brief Getter pour le nom du droit.
@@ -33,8 +54,26 @@ public:
     std::string getName() const;
 
     /**
+     * @brief Setter pour le droit de lecture.
+     * @param newName Nouveau droit.
+     */
+    void setReadable(const bool _read);
+
+    /**
+     * @brief Setter pour le droit d'écriture.
+     * @param _read Nouveau droit.
+     */
+    void setWritable(const bool _write);
+
+    /**
+     * @brief Setter pour le droit de modification.
+     * @param _write Nouveau droit.
+     */
+    void setModify(const bool _modify);
+
+    /**
      * @brief Setter pour le nom du droit.
-     * @param newName Nouveau nom du droit.
+     * @param _modify Nouveau nom du droit.
      */
     void setName(const std::string& newName);
 
