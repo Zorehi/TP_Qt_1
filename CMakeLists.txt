@@ -39,6 +39,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         profilpage.h profilpage.cpp profilpage.ui
         listtable.h listtable.cpp listtable.ui
         database.h database.cpp
+        visualizedb.h visualizedb.cpp visualizedb.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET TP_Qt_1 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

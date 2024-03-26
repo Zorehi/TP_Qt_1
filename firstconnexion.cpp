@@ -20,7 +20,7 @@ void FirstConnexion::onPushButtonClicked()
     // Récupérer le nom d'utilisateur et le mot de passe depuis les champs de texte
     QString username = ui->lineEdit->text();
     QString password = ui->lineEdit_2->text();
-    Droits droits("User");
+    Droits droits("User", true, true, true);
 
     // Vérifier si le nom d'utilisateur ou le mot de passe est vide
     if (username.isEmpty() || password.isEmpty()) {

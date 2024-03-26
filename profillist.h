@@ -9,7 +9,7 @@ namespace Ui {
 class ProfilList;
 }
 
-class ProfilList : public QMainWindow
+class ProfilList : public QWidget
 {
     Q_OBJECT
 

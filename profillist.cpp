@@ -3,7 +3,7 @@
 #include "ui_profillist.h"
 
 ProfilList::ProfilList(QWidget *parent) :
-    QMainWindow(parent),
+    QWidget(parent),
     ui(new Ui::ProfilList)
 {
     ui->setupUi(this);

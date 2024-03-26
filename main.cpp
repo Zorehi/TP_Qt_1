@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     Data::getInstance()->initFromQJsonObject(jsonObject);
     std::vector<User>& userList = Data::getInstance()->getUserList();
     if (userList.empty()) {
-        User user = User("superadmin", "password", Droits("superadmin"));
+        User user = User("superadmin", "password", Droits());
         user.getProfilList().push_back(Profil("default"));
         userList.push_back(user);
     }
