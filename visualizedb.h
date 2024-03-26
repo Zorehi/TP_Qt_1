@@ -1,32 +1,29 @@
 #ifndef VISUALIZEDB_H
 #define VISUALIZEDB_H
 
-#include <QDialog>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlTableModel>
+#include <QtSql>
 #include <QListWidget>
 #include "database.h"
 #include "profil.h"
 
 namespace Ui {
-class visualizedb;
+class VisualizeDb;
 }
 
-class visualizedb : public QWidget
+class VisualizeDb : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit visualizedb(Profil& profil, Database& database, QWidget *parent = nullptr);
-    ~visualizedb();
+    explicit VisualizeDb(Profil& profil, Database& database, QWidget *parent = nullptr);
+    ~VisualizeDb();
 
+private slots:
     void showTable(QListWidgetItem* item);
     void onClickRetour();
 
 private:
-    Ui::visualizedb *ui;
-    QSqlDatabase db;
+    Ui::VisualizeDb *ui;
     Database& database;
     Profil& profil;
 };

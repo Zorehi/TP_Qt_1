@@ -1,6 +1,7 @@
 #include "profilpage.h"
+#include "mainwindow.h"
 #include "ui_profilpage.h"
-#include "listtable.h"
+#include "visualizedb.h"
 #include <QFileDialog>
 
 ProfilPage::ProfilPage(Profil& profil, QWidget *parent) :
@@ -30,11 +31,20 @@ void ProfilPage::showListTable() {
         // Aucun élément sélectionné, ne rien faire
         return;
     }
-    // Créer une instance de ListTable
-    ListTable *listTable = new ListTable(this);
 
-    // Afficher ListTable
-    listTable->show();
+    QString selectedName = ui->listWidget->currentItem()->text();
+
+    Database* dbselected = nullptr;
+    for (Database& db : profil.getDbList()) {
+        if (db.getName().c_str() == selectedName) {
+            dbselected = &db;
+            break;
+        }
+    }
+
+    VisualizeDb* visualizedb = new VisualizeDb(profil, *dbselected, this);
+
+    ((MainWindow*)parent())->setCentralWidget(visualizedb);
 }
 
 void ProfilPage::openFileDialog() {
@@ -44,7 +54,7 @@ void ProfilPage::openFileDialog() {
     QString fileName = QFileInfo(filePath).fileName();
     if (!filePath.isEmpty()) {
         qDebug() << "Selected Name:" << fileName;
-        Database newDatabase(filePath.toStdString());
+        Database newDatabase;
         newDatabase.setName(fileName.toStdString());
         newDatabase.setPath(filePath.toStdString()); // Ajouter le chemin du fichier à la base de données
         qDebug() << "Selected Name:" << profil.getName();

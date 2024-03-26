@@ -58,6 +58,7 @@ Profil Profil::fromQJsonObject(QJsonObject jsonObject) {
 
     Profil profil;
     profil.setName(name);
+    profil.setDbList(dbList);
 
     return profil;
 }

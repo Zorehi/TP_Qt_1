@@ -1,4 +1,6 @@
 #include "firstconnexion.h"
+#include "loginpage.h"
+#include "mainwindow.h"
 #include "ui_firstconnexion.h"
 
 FirstConnexion::FirstConnexion(QWidget *parent) :
@@ -30,6 +32,12 @@ void FirstConnexion::onPushButtonClicked()
     }
 
     // Créer un nouvel utilisateur avec les informations saisies
-    User newUser(username.toStdString(), password.toStdString(), droits); // Remplacer Droits() avec les droits appropriés
-    Data::getInstance()->addUser(newUser);
+    User* user = new User(username.toStdString(), password.toStdString(), droits);
+    user->getProfilList().push_back(Profil("default"));
+
+    Data::getInstance()->getUserList().push_back(*user);
+
+    // Afficher la page de connexion normale après avoir ajouté le nouvel utilisateur
+    LoginPage* loginPage = new LoginPage(this);
+    ((MainWindow*)parent())->setCentralWidget(loginPage);
 }

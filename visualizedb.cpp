@@ -2,15 +2,20 @@
 #include "mainwindow.h"
 #include "ui_visualizedb.h"
 
-visualizedb::visualizedb(Profil& profil, Database& database, QWidget *parent)
+VisualizeDb::VisualizeDb(Profil& profil, Database& database, QWidget *parent)
     : QWidget(parent)
-    ,ui(new Ui::visualizedb), database(database), profil(profil), db(QSqlDatabase())
+    ,ui(new Ui::VisualizeDb), database(database), profil(profil)
 {
     ui->setupUi(this);
 
+    QSqlDatabase db;
     // Connexion à la base de données SQLite
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(database.getPath().c_str()); // Remplacez par le chemin vers votre base de données
+    if (QSqlDatabase::contains(database.getPath().c_str())) {
+        QSqlDatabase db = QSqlDatabase::database(database.getPath().c_str());
+    } else {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName(database.getPath().c_str());
+    }
 
     // Vérification si la base de données est ouverte
     if (!db.open()) {
@@ -21,31 +26,43 @@ visualizedb::visualizedb(Profil& profil, Database& database, QWidget *parent)
         while (query.next()) {
             ui->listWidget->addItem(query.value(0).toString());
         }
-        db.close();
     }
-    connect(ui->listWidget, &QListWidget::itemClicked, this, &visualizedb::showTable);
-    connect(ui->pushButton, &QPushButton::clicked, this, &visualizedb::onClickRetour);
+    connect(ui->listWidget, &QListWidget::itemClicked, this, &VisualizeDb::showTable);
+    connect(ui->pushButton, &QPushButton::clicked, this, &VisualizeDb::onClickRetour);
 }
 
-visualizedb::~visualizedb()
+VisualizeDb::~VisualizeDb()
 {
+    QSqlDatabase db = QSqlDatabase::database(database.getPath().c_str());
+    if (db.isOpen()) {
+        db.close();
+    }
     delete ui;
 }
 
-void visualizedb::showTable(QListWidgetItem* item) {
+void VisualizeDb::showTable(QListWidgetItem* item) {
     // Récupérer le nom de la table sélectionnée
     QString tableName = item->text();
 
-    // Création du modèle de table
-    QSqlTableModel model(this, db);
-    model.setTable(tableName);
-    model.select();
+    QSqlDatabase db = QSqlDatabase::database();
 
-    // Mettre à jour le modèle de données de QTableView
-    ui->tableView->setModel(&model);
+    // Vérification si la base de données est ouverte
+    if (!db.open()) {
+        qDebug() << "Impossible d'ouvrir la base de données.";
+    } else {
+        // Création du modèle de table
+        QSqlTableModel *model = new QSqlTableModel(ui->tableView, db);
+        model->setEditStrategy(QSqlTableModel::OnFieldChange);
+        model->setTable(tableName);
+        model->select();
+
+        // Mettre à jour le modèle de données de QTableView
+        ui->tableView->setModel(model);
+        ui->tableView->show();
+    }
 }
 
-void visualizedb::onClickRetour() {
+void VisualizeDb::onClickRetour() {
     ProfilPage* profilPage = new ProfilPage(profil);
     ((MainWindow*)parent())->setCentralWidget(profilPage);
 }

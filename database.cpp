@@ -34,15 +34,18 @@ std::ostream& operator<<(std::ostream& os, const Database& db) {
 QJsonObject Database::toQJsonObject() const {
     QJsonObject jsonObject;
     jsonObject["path"] = QString::fromStdString(getPath());
+    jsonObject["name"] = QString::fromStdString(getName());
 
     return jsonObject;
 }
 
 Database Database::fromQJsonObject(QJsonObject jsonObject) {
     std::string path = jsonObject["path"].toString().toStdString();
+    std::string name = jsonObject["name"].toString().toStdString();
 
     Database database;
     database.setPath(path);
+    database.setName(name);
 
     return database;
 }

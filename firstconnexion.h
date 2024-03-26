@@ -19,9 +19,6 @@ public:
     explicit FirstConnexion(QWidget *parent = nullptr);
     ~FirstConnexion();
 
-signals:
-    void createUser(const User& newUser); // Signal pour créer un nouvel utilisateur
-
 private slots:
     void onPushButtonClicked(); // Slot pour gérer le clic sur le bouton "Créer un compte"
 
