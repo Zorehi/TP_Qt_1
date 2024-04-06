@@ -4,10 +4,10 @@
 #include "visualizedb.h"
 #include <QFileDialog>
 
-ProfilPage::ProfilPage(Profil& profil, QWidget *parent) :
+ProfilPage::ProfilPage(User& user, Profil& profil, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProfilPage),
-    profil(profil)
+    profil(profil), user(user)
 {
     ui->setupUi(this);
 
@@ -42,7 +42,7 @@ void ProfilPage::showListTable() {
         }
     }
 
-    VisualizeDb* visualizedb = new VisualizeDb(profil, *dbselected, this);
+    VisualizeDb* visualizedb = new VisualizeDb(user, profil, *dbselected, this);
 
     ((MainWindow*)parent())->setCentralWidget(visualizedb);
 }

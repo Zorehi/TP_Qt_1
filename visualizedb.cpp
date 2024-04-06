@@ -1,10 +1,11 @@
 #include "visualizedb.h"
 #include "mainwindow.h"
 #include "ui_visualizedb.h"
+#include "profilpage.h"
 
-VisualizeDb::VisualizeDb(Profil& profil, Database& database, QWidget *parent)
+VisualizeDb::VisualizeDb(User& user, Profil& profil, Database& database, QWidget *parent)
     : QWidget(parent)
-    ,ui(new Ui::VisualizeDb), database(database), profil(profil)
+    ,ui(new Ui::VisualizeDb), database(database), profil(profil), user(user)
 {
     ui->setupUi(this);
 
@@ -27,13 +28,23 @@ VisualizeDb::VisualizeDb(Profil& profil, Database& database, QWidget *parent)
             ui->listWidget->addItem(query.value(0).toString());
         }
     }
+
     connect(ui->listWidget, &QListWidget::itemClicked, this, &VisualizeDb::showTable);
-    connect(ui->pushButton, &QPushButton::clicked, this, &VisualizeDb::onClickRetour);
+    connect(ui->buttonBack, &QPushButton::clicked, this, &VisualizeDb::onClickRetour);
+    connect(ui->buttonDelete, &QPushButton::clicked, this, &VisualizeDb::onClickDelete);
+    connect(ui->buttonAdd, &QPushButton::clicked, this, &VisualizeDb::onClickAdd);
+    connect(ui->buttonDisconnect, &QPushButton::clicked, this, &VisualizeDb::onClickDisconnect);
+
+    ui->buttonDelete->setEnabled(user.getDroits().hasDelete());
+    ui->buttonAdd->setEnabled(user.getDroits().hasCreate());
+    if (!user.getDroits().hasUpdate()) {
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    }
 }
 
 VisualizeDb::~VisualizeDb()
 {
-    QSqlDatabase db = QSqlDatabase::database(database.getPath().c_str());
+    QSqlDatabase db = QSqlDatabase::database();
     if (db.isOpen()) {
         db.close();
     }
@@ -63,6 +74,32 @@ void VisualizeDb::showTable(QListWidgetItem* item) {
 }
 
 void VisualizeDb::onClickRetour() {
-    ProfilPage* profilPage = new ProfilPage(profil);
+    ProfilPage* profilPage = new ProfilPage(user, profil);
     ((MainWindow*)parent())->setCentralWidget(profilPage);
+}
+
+void VisualizeDb::onClickAdd() {
+    QSqlTableModel *model = (QSqlTableModel*)ui->tableView->model();
+    QSqlRecord record = model->record();
+    if (model->insertRecord(-1, record)) {
+        model->submitAll();
+        model->select();
+    } else {
+        QMessageBox::critical(nullptr, "Erreur", "Impossible d'insérer la ligne dans le modèle.");
+    }
+}
+
+void VisualizeDb::onClickDelete() {
+    QModelIndexList selection = ui->tableView->selectionModel()->selectedRows();
+    if (!selection.empty()) {
+        int row = selection.first().row();
+        QSqlTableModel *model = (QSqlTableModel*)ui->tableView->model();
+        model->removeRow(row);
+        model->submitAll();
+        model->select();
+    }
+}
+
+void VisualizeDb::onClickDisconnect() {
+
 }

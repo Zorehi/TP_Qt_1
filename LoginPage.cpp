@@ -47,10 +47,7 @@ void LoginPage::onConnexionClicked() {
     }
     else
     {
-        std::vector<Profil>& listProfil = UserList[cont].getProfilList();
-        ProfilList* profilListPage = new ProfilList(listProfil, this);
-        profilListPage->updateTextBrowser(listProfil);
-        profilListPage->updateComboBox(listProfil);
+        ProfilList* profilListPage = new ProfilList(UserList[cont], this);
         ((MainWindow*)parent())->setCentralWidget(profilListPage);
     }
 }

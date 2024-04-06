@@ -4,7 +4,7 @@
 #include <QtSql>
 #include <QListWidget>
 #include "database.h"
-#include "profil.h"
+#include "user.h"
 
 namespace Ui {
 class VisualizeDb;
@@ -15,17 +15,21 @@ class VisualizeDb : public QWidget
     Q_OBJECT
 
 public:
-    explicit VisualizeDb(Profil& profil, Database& database, QWidget *parent = nullptr);
+    explicit VisualizeDb(User& user, Profil& profil, Database& database, QWidget *parent = nullptr);
     ~VisualizeDb();
 
 private slots:
     void showTable(QListWidgetItem* item);
     void onClickRetour();
+    void onClickAdd();
+    void onClickDelete();
+    void onClickDisconnect();
 
 private:
     Ui::VisualizeDb *ui;
     Database& database;
     Profil& profil;
+    User& user;
 };
 
 #endif // VISUALIZEDB_H

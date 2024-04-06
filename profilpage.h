@@ -1,7 +1,7 @@
 #ifndef PROFILPAGE_H
 #define PROFILPAGE_H
 
-#include "profil.h"
+#include "user.h"
 
 #include "database.h"
 #include <QWidget>
@@ -16,7 +16,7 @@ class ProfilPage : public QWidget
     Q_OBJECT
 
 public:
-    explicit ProfilPage(Profil& profil, QWidget *parent = nullptr);
+    explicit ProfilPage(User& user, Profil& profil, QWidget *parent = nullptr);
     ~ProfilPage();
 
 private slots:
@@ -29,6 +29,7 @@ protected:
 private:
     Ui::ProfilPage *ui;
     Profil& profil;
+    User& user;
 };
 
 #endif // PROFILPAGE_H

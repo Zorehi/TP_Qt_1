@@ -12,10 +12,10 @@
 class Droits
 {
 private:
-    std::string name;
+    bool create;
     bool read;
-    bool write;
-    bool modify;
+    bool update;
+    bool _delete;
 
 public:
     /**
@@ -27,55 +27,55 @@ public:
      * @brief Constructeur avec initialisation du nom du droit.
      * @param _name Nom du droit.
      */
-    Droits(const std::string& _name, const bool read, const bool write, const bool modify);
+    Droits(const bool create, const bool read, const bool update, const bool _delete);
 
     /**
      * @brief Getter pour le droit de lecture.
      * @return Nom du droit.
      */
-    bool hasReadable() const;
+    bool hasRead() const;
 
     /**
-     * @brief Getter pour le droit d'écriture.
+     * @brief Getter pour le droit de création.
      * @return Nom du droit.
      */
-    bool hasWritable() const;
+    bool hasCreate() const;
 
     /**
      * @brief Getter pour le droit de modification.
      * @return Nom du droit.
      */
-    bool hasModify() const;
+    bool hasUpdate() const;
 
     /**
-     * @brief Getter pour le nom du droit.
+     * @brief Getter pour le droit de modification.
      * @return Nom du droit.
      */
-    std::string getName() const;
+    bool hasDelete() const;
 
     /**
      * @brief Setter pour le droit de lecture.
      * @param newName Nouveau droit.
      */
-    void setReadable(const bool _read);
+    void setRead(const bool _read);
 
     /**
-     * @brief Setter pour le droit d'écriture.
+     * @brief Setter pour le droit de création.
      * @param _read Nouveau droit.
      */
-    void setWritable(const bool _write);
+    void setCreate(const bool _create);
 
     /**
      * @brief Setter pour le droit de modification.
      * @param _write Nouveau droit.
      */
-    void setModify(const bool _modify);
+    void setUpdate(const bool _update);
 
     /**
-     * @brief Setter pour le nom du droit.
-     * @param _modify Nouveau nom du droit.
+     * @brief Setter pour le droit de modification.
+     * @param _write Nouveau droit.
      */
-    void setName(const std::string& newName);
+    void setDelete(const bool _delete);
 
     /**
      * @brief Convertit l'instance de Droits en objet JSON.

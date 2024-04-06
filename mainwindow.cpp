@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     Data::getInstance()->initFromQJsonObject(jsonObject);
     std::vector<User>& userList = Data::getInstance()->getUserList();
     if (userList.empty()) {
-        User user = User("superadmin", "password", Droits("admin", true, true, true));
+        User user = User("superadmin", "password", Droits(true, true, true, true));
         user.getProfilList().push_back(Profil("default"));
         userList.push_back(user);
     }
