@@ -33,7 +33,6 @@ VisualizeDb::VisualizeDb(User& user, Profil& profil, Database& database, QWidget
     connect(ui->buttonBack, &QPushButton::clicked, this, &VisualizeDb::onClickRetour);
     connect(ui->buttonDelete, &QPushButton::clicked, this, &VisualizeDb::onClickDelete);
     connect(ui->buttonAdd, &QPushButton::clicked, this, &VisualizeDb::onClickAdd);
-    connect(ui->buttonDisconnect, &QPushButton::clicked, this, &VisualizeDb::onClickDisconnect);
     connect(ui->SQLButton, &QPushButton::clicked,this, &VisualizeDb::onClickSQLButton);
 
     ui->buttonDelete->setEnabled(user.getDroits().hasDelete());
@@ -101,9 +100,6 @@ void VisualizeDb::onClickDelete() {
     }
 }
 
-void VisualizeDb::onClickDisconnect() {
-
-}
 
 void VisualizeDb::onClickSQLButton(){
 

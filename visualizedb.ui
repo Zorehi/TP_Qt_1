@@ -58,19 +58,6 @@
     <string>Retour</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="buttonDisconnect">
-   <property name="geometry">
-    <rect>
-     <x>500</x>
-     <y>20</y>
-     <width>81</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Deconnexion</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="buttonAdd">
    <property name="geometry">
     <rect>

@@ -23,7 +23,6 @@ private slots:
     void onClickRetour();
     void onClickAdd();
     void onClickDelete();
-    void onClickDisconnect();
     void onClickSQLButton();
 
 private:
