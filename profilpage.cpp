@@ -16,11 +16,6 @@ ProfilPage::ProfilPage(User& user, Profil& profil, QWidget *parent) :
     updateListWidget(profil.getDbList());
 }
 
-void ProfilPage::paintEvent(QPaintEvent *event) {
-    QWidget::paintEvent(event);
-
-    resize(1000, 1000);
-}
 ProfilPage::~ProfilPage()
 {
     delete ui;

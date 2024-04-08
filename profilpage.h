@@ -43,11 +43,6 @@ private slots:
     void openFileDialog();
 
 protected:
-    /**
-     * @brief Méthode redéfinie pour gérer l'événement de peinture.
-     * @param event Événement de peinture.
-     */
-    void paintEvent(QPaintEvent *event) override;
 
     /**
      * @brief Méthode pour mettre à jour le listWidget avec la liste de bases de données.
