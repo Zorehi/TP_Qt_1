@@ -24,6 +24,7 @@ private slots:
     void onClickAdd();
     void onClickDelete();
     void onClickDisconnect();
+    void onClickSQLButton();
 
 private:
     Ui::VisualizeDb *ui;

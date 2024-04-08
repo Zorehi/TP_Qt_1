@@ -8,7 +8,7 @@ VisualizeDb::VisualizeDb(User& user, Profil& profil, Database& database, QWidget
     ,ui(new Ui::VisualizeDb), database(database), profil(profil), user(user)
 {
     ui->setupUi(this);
-
+    setFixedSize(615,560);
     QSqlDatabase db;
     // Connexion à la base de données SQLite
     if (QSqlDatabase::contains(database.getPath().c_str())) {
@@ -34,6 +34,7 @@ VisualizeDb::VisualizeDb(User& user, Profil& profil, Database& database, QWidget
     connect(ui->buttonDelete, &QPushButton::clicked, this, &VisualizeDb::onClickDelete);
     connect(ui->buttonAdd, &QPushButton::clicked, this, &VisualizeDb::onClickAdd);
     connect(ui->buttonDisconnect, &QPushButton::clicked, this, &VisualizeDb::onClickDisconnect);
+    connect(ui->SQLButton, &QPushButton::clicked,this, &VisualizeDb::onClickSQLButton);
 
     ui->buttonDelete->setEnabled(user.getDroits().hasDelete());
     ui->buttonAdd->setEnabled(user.getDroits().hasCreate());
@@ -102,4 +103,39 @@ void VisualizeDb::onClickDelete() {
 
 void VisualizeDb::onClickDisconnect() {
 
+}
+
+void VisualizeDb::onClickSQLButton(){
+
+    QString sqlQuery = ui->SQLText->toPlainText().trimmed();
+
+    QSqlQuery query;
+
+    QString queryType = sqlQuery.trimmed().split(" ").at(0).toUpper();
+    if (queryType == "SELECT" && !user.getDroits().hasRead()) {
+        qDebug() << "L'utilisateur n'a pas le droit de lire les données.";
+        return;
+    } else if (queryType == "INSERT" && !user.getDroits().hasCreate()) {
+        qDebug() << "L'utilisateur n'a pas le droit d'insérer des données.";
+        return;
+    } else if (queryType == "UPDATE" && !user.getDroits().hasUpdate()) {
+        qDebug() << "L'utilisateur n'a pas le droit de mettre à jour les données.";
+        return;
+    } else if (queryType == "DELETE" && !user.getDroits().hasDelete()) {
+        qDebug() << "L'utilisateur n'a pas le droit de supprimer les données.";
+        return;
+    }
+
+    // Exécuter la requête SQL
+    if (query.exec(sqlQuery)) {
+        if (queryType == "SELECT") {
+            QSqlQueryModel *queryModel = new QSqlQueryModel();
+            queryModel->setQuery(query);
+            ui->tableView->setModel(queryModel);
+        } else {
+            qDebug() << "Requête exécutée avec succès.";
+        }
+    } else {
+        qDebug() << "Erreur SQL:" << query.lastError().text();
+    }
 }
